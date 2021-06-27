@@ -5,7 +5,8 @@ using System.Runtime.InteropServices;
 
 public class Injector
 {
-    [DllImport(@"C:\\Users\Ege\\Documents\\GitHub\\JADI\\JADI\\Release\\JADEditorLib.dll", CallingConvention = CallingConvention.Cdecl)]
+    //[DllImport(@"C:\\Users\Ege\\Documents\\GitHub\\JADI\\JADI\\Release\\JADEditorLib.dll", CallingConvention = CallingConvention.Cdecl)]
+    [DllImport("JADEditorLib.dll", CallingConvention = CallingConvention.Cdecl)]
     internal static extern int CreateProcessWithDll(string ExeName, string ExeDir, string DllDir, bool IsSuspended);
 
     [DllImport("kernel32.dll")]
@@ -63,7 +64,7 @@ public class Injector
 
         IntPtr hLoadThread = CreateRemoteThread(procHandle, IntPtr.Zero, 0, loadLibraryAddr, allocMemAddress, 0, IntPtr.Zero);
 
-        WaitForSingleObject(hLoadThread, INFINITE);
+        //WaitForSingleObject(hLoadThread, INFINITE);
         VirtualFreeEx(procHandle, allocMemAddress, (uint)((DllName.Length + 1) * Marshal.SizeOf(typeof(char))), MEM_RELEASE);
         CloseHandle(procHandle);
 

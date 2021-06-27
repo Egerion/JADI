@@ -16,7 +16,9 @@ namespace JADI
         public Form_JADI()
         {
             InitializeComponent();
+            LoadUserSettings();
             FindProcess();
+            Application.ApplicationExit += new EventHandler(this.ApplicationExit);
         }
 
         private void FindProcess()
@@ -27,14 +29,18 @@ namespace JADI
                 try
                 {
                     ComboBox_Process.Items.Add(ProcessCollection[i].ProcessName);
-                    //Icon ico = Icon.ExtractAssociatedIcon(ProcessCollection[i].MainModule.FileName);
                 }
                 catch
                 {
-
-                }
-                  
+                    MessageBox.Show("Application cannot find process(es).", "Error");
+                    Environment.Exit(0);
+                }               
             }
+        }
+
+        private void ApplicationExit(object sender, EventArgs e)
+        {
+            SaveUserSettings();
         }
 
         private void Button_ProcRefresh_Click(object sender, EventArgs e)

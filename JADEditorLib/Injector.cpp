@@ -27,3 +27,4 @@ EXTERN_DLL_EXPORT int CreateProcessWithDll(const char* ExeDir, const char* Curre
 	}
 	return EXIT_SUCCESS;
 }
+
